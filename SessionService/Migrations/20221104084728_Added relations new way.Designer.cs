@@ -12,43 +12,17 @@ using SessionService.Data;
 namespace SessionService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221101131438_Added new models")]
-    partial class Addednewmodels
+    [Migration("20221104084728_Added relations new way")]
+    partial class Addedrelationsnewway
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc.2.22472.11")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("SessionService.Models.GameModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Difficulty")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MaxPlayers")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MinPlayers")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GameModel");
-                });
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("SessionService.Models.PlayerModel", b =>
                 {
@@ -63,14 +37,14 @@ namespace SessionService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SessionModelId")
+                    b.Property<Guid>("SessionModelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SessionModelId");
 
-                    b.ToTable("PlayerModel");
+                    b.ToTable("Player");
                 });
 
             modelBuilder.Entity("SessionService.Models.SessionModel", b =>
@@ -79,7 +53,16 @@ namespace SessionService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CurrentPlayer")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GamePin")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("PlayerWon")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Started")
@@ -87,27 +70,18 @@ namespace SessionService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
                     b.ToTable("Session");
                 });
 
             modelBuilder.Entity("SessionService.Models.PlayerModel", b =>
                 {
-                    b.HasOne("SessionService.Models.SessionModel", null)
+                    b.HasOne("SessionService.Models.SessionModel", "SessionModel")
                         .WithMany("Players")
-                        .HasForeignKey("SessionModelId");
-                });
-
-            modelBuilder.Entity("SessionService.Models.SessionModel", b =>
-                {
-                    b.HasOne("SessionService.Models.GameModel", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId")
+                        .HasForeignKey("SessionModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Game");
+                    b.Navigation("SessionModel");
                 });
 
             modelBuilder.Entity("SessionService.Models.SessionModel", b =>

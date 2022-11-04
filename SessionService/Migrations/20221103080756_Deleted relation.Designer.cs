@@ -12,8 +12,8 @@ using SessionService.Data;
 namespace SessionService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221102080741_deleted whole gamemodel")]
-    partial class deletedwholegamemodel
+    [Migration("20221103080756_Deleted relation")]
+    partial class Deletedrelation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,16 @@ namespace SessionService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CurrentPlayer")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GamePin")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("PlayerWon")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Started")

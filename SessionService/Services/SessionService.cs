@@ -38,4 +38,10 @@ public class SessionService : ControllerBase, ISessionService
     {
         return await _repository.DeleteSession(id);
     }
+
+    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id)
+    {
+        return await _repository.GetPlayersFromSession(id);
+    }
+
 }

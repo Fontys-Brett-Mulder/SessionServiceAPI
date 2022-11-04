@@ -35,7 +35,7 @@ namespace SessionService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SessionModelId")
+                    b.Property<Guid>("SessionModelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -57,6 +57,9 @@ namespace SessionService.Migrations
                     b.Property<Guid>("GameId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("GamePin")
+                        .HasColumnType("int");
+
                     b.Property<Guid?>("PlayerWon")
                         .HasColumnType("uniqueidentifier");
 
@@ -70,9 +73,13 @@ namespace SessionService.Migrations
 
             modelBuilder.Entity("SessionService.Models.PlayerModel", b =>
                 {
-                    b.HasOne("SessionService.Models.SessionModel", null)
+                    b.HasOne("SessionService.Models.SessionModel", "SessionModel")
                         .WithMany("Players")
-                        .HasForeignKey("SessionModelId");
+                        .HasForeignKey("SessionModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SessionModel");
                 });
 
             modelBuilder.Entity("SessionService.Models.SessionModel", b =>

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using SessionService.Data;
 using SessionService.Data.Repository;
 using SessionService.Services.Interfaces;
@@ -30,6 +31,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService.Services.SessionService>();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 
