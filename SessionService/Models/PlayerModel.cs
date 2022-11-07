@@ -12,5 +12,4 @@ public class PlayerModel
     
     [ForeignKey("SessionModel")]
     public Guid SessionModelId { get; set; }
-    public virtual SessionModel SessionModel { get; set; }
 }
