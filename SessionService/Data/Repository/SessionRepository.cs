@@ -1,9 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SessionService.Data.Repository.Interfaces;
 using SessionService.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace SessionService.Data.Repository;
 
@@ -17,6 +15,10 @@ public class SessionRepository : ControllerBase, ISessionRepository
         _db = db;
     }
     
+    /// <summary>
+    /// Getting all sessions
+    /// </summary>
+    /// <returns></returns>
     public async Task<ActionResult<IEnumerable<SessionModel>>> GetAllSessions()
     {
         if (_db.Session == null)
@@ -29,6 +31,11 @@ public class SessionRepository : ControllerBase, ISessionRepository
         return sessions;
     }
 
+    /// <summary>
+    /// Getting an specific session
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public async Task<ActionResult<SessionModel>> GetSessionById(Guid id)
     {
         if (_db.Session == null)
@@ -46,6 +53,12 @@ public class SessionRepository : ControllerBase, ISessionRepository
         return session;
     }
 
+    /// <summary>
+    /// Update a session
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="session"></param>
+    /// <returns></returns>
     public async Task<IActionResult> UpdateSession(Guid id, SessionModel session)
     {
         if (id != session.Id)
@@ -72,6 +85,11 @@ public class SessionRepository : ControllerBase, ISessionRepository
         return Ok();
     }
 
+    /// <summary>
+    /// Creating a new session
+    /// </summary>
+    /// <param name="session"></param>
+    /// <returns></returns>
     public async Task<ActionResult<SessionModel>> CreateSession(SessionModel session)
     {
         if (_db.Session == null)
@@ -85,6 +103,11 @@ public class SessionRepository : ControllerBase, ISessionRepository
         return CreatedAtAction("GetSessionById", new {id = session.Id}, session);
     }
 
+    /// <summary>
+    /// Deleting a session
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public async Task<IActionResult> DeleteSession(Guid id)
     {
         if (_db.Session == null)
@@ -106,15 +129,26 @@ public class SessionRepository : ControllerBase, ISessionRepository
 
     }
     
+    /// <summary>
+    /// Check if a session exists
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     private bool SessionModelExists(Guid id)
     {
         return (_db.Session?.Any(e => e.Id == id)).GetValueOrDefault();
     }
     
+    /// <summary>
+    /// Get all players from a specific session
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id)
     {
         var players = await _db.Session.Where(s => s.Id == id).SelectMany(m => m.Players).ToListAsync();
 
         return players;
     }
+    
 }
