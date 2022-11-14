@@ -6,13 +6,16 @@ namespace SessionService.Tests.Repositories;
 public class SessionRepositoryTest
 {
     private readonly List<SessionModel> _sessions;
+    private readonly List<PlayerModel> _players1;
+    private readonly List<PlayerModel> _players2;
 
     // private readonly ITestOutputHelper _testOutputHelper;
-    private readonly Mock<ISessionRepository> _repository = new Mock<ISessionRepository>();
+    private readonly Mock<ISessionRepository> _sessionRepository = new Mock<ISessionRepository>();
+    private readonly Mock<IPlayerRepository> _playerRepository = new Mock<IPlayerRepository>();
 
     public SessionRepositoryTest()
     {
-        List<PlayerModel> _players1 = new List<PlayerModel>()
+        _players1 = new List<PlayerModel>()
         {
             new PlayerModel()
             {
@@ -29,7 +32,7 @@ public class SessionRepositoryTest
                 SessionModelId = new Guid("7ea98e9a-7364-4b7a-af16-8a8b478ca58a"),
             },
         };
-        List<PlayerModel> _players2 = new List<PlayerModel>()
+        _players2 = new List<PlayerModel>()
         {
             new PlayerModel()
             {
@@ -72,10 +75,39 @@ public class SessionRepositoryTest
         };
     }
 
+    /// <summary>
+    /// Check if the session amount is 2
+    /// </summary>
     [Fact]
     public async void CheckIfSessionAmountIsEqual()
     {
-        _repository.Setup(m => m.GetAllSessions()).ReturnsAsync(_sessions);
+        _sessionRepository.Setup(m => m.GetAllSessions()).ReturnsAsync(_sessions);
         
+        var _service = new SessionService.Services.SessionService(_sessionRepository.Object);
+
+        var session = await _service.GetAllSessions();
+        
+        Assert.Equal(2, _sessions.Count);
+    }
+
+    /// <summary>
+    /// Check if the sessions are of SessionModel
+    /// </summary>
+    /// <param name="guid"></param>
+    [Theory]
+    [InlineData("7ea98e9a-7364-4b7a-af16-8a8b478ca58a")]
+    [InlineData("b17fd75f-a0c5-416d-a26d-b56d9731d665")]
+    public async void CheckIfSessionsAreOfSessionModel(Guid guid)
+    {
+        // Creating a mock for the GetSpecificGame function
+        _sessionRepository.Setup(m => m.GetSessionById(It.IsAny<Guid>()))
+            .ReturnsAsync((Guid id) => _sessions.FirstOrDefault(g => g.Id == guid));
+            
+        var _service = new SessionService.Services.SessionService(_sessionRepository.Object);
+
+        var session = await _service.GetSessionById(guid);
+            
+        // Check if all the 
+        Assert.IsType<SessionModel>(session.Value);
     }
 }
