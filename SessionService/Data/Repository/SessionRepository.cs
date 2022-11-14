@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.ObjectModel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SessionService.Data.Repository.Interfaces;
 using SessionService.Models;
@@ -22,8 +23,10 @@ public class SessionRepository : ControllerBase, ISessionRepository
         {
             return NotFound();
         }
+
+        var sessions = await _db.Session.Include(c => c.Players).ToListAsync();
         
-        return await _db.Session.ToListAsync();
+        return sessions;
     }
 
     public async Task<ActionResult<SessionModel>> GetSessionById(Guid id)
@@ -47,7 +50,7 @@ public class SessionRepository : ControllerBase, ISessionRepository
     {
         if (id != session.Id)
         {
-            return BadRequest();
+            return BadRequest("Cannot find any session with id: " + id);
         }
 
         _db.Entry(session).State = EntityState.Modified;
@@ -106,5 +109,12 @@ public class SessionRepository : ControllerBase, ISessionRepository
     private bool SessionModelExists(Guid id)
     {
         return (_db.Session?.Any(e => e.Id == id)).GetValueOrDefault();
+    }
+    
+    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id)
+    {
+        var players = await _db.Session.Where(s => s.Id == id).SelectMany(m => m.Players).ToListAsync();
+
+        return players;
     }
 }

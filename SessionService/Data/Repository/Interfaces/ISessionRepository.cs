@@ -10,4 +10,5 @@ public interface ISessionRepository
     Task<IActionResult> UpdateSession(Guid id, SessionModel sessionModel);
     Task<ActionResult<SessionModel>> CreateSession(SessionModel sessionModel);
     Task<IActionResult> DeleteSession(Guid id);
+    Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id);
 }

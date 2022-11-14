@@ -12,8 +12,8 @@ using SessionService.Data;
 namespace SessionService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221101131938_Changed database tables")]
-    partial class Changeddatabasetables
+    [Migration("20221107201040_Deleted sessionmodel")]
+    partial class Deletedsessionmodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,31 +23,6 @@ namespace SessionService.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("SessionService.Models.GameModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Difficulty")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MaxPlayers")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MinPlayers")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Game");
-                });
 
             modelBuilder.Entity("SessionService.Models.PlayerModel", b =>
                 {
@@ -62,7 +37,7 @@ namespace SessionService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SessionModelId")
+                    b.Property<Guid>("SessionModelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -78,15 +53,22 @@ namespace SessionService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CurrentPlayer")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GamePin")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("PlayerWon")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Started")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GameId");
 
                     b.ToTable("Session");
                 });
@@ -95,18 +77,9 @@ namespace SessionService.Migrations
                 {
                     b.HasOne("SessionService.Models.SessionModel", null)
                         .WithMany("Players")
-                        .HasForeignKey("SessionModelId");
-                });
-
-            modelBuilder.Entity("SessionService.Models.SessionModel", b =>
-                {
-                    b.HasOne("SessionService.Models.GameModel", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId")
+                        .HasForeignKey("SessionModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("SessionService.Models.SessionModel", b =>
