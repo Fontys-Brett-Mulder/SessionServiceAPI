@@ -4,6 +4,7 @@ using SessionService.Data.Repository;
 using SessionService.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SessionService.Data.Repository.Interfaces;
+using SessionService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService.Services.SessionService>();
+
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IPlayerService, SessionService.Services.PlayerService>();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
