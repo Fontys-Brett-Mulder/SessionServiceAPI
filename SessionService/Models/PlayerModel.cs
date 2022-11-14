@@ -11,5 +11,5 @@ public class PlayerModel
     [DefaultValue(false)] public bool IsHost { get; set; }
     
     [ForeignKey("SessionModel")]
-    public Guid SessionModelId { get; set; }
+    public Guid? SessionModelId { get; set; }
 }

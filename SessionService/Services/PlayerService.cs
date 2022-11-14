@@ -24,9 +24,9 @@ public class PlayerService : ControllerBase, IPlayerService
         return await _repository.GetAllPlayersBySessionId(id);
     }
 
-    public async Task<ActionResult<PlayerModel>> AddPlayerToSession(PlayerModel playerModel)
+    public async Task<ActionResult<PlayerModel>> AddPlayerToSession(PlayerModel playerModel, int gamePin)
     {
-        return await _repository.AddPlayerToSession(playerModel);
+        return await _repository.AddPlayerToSession(playerModel, gamePin);
     }
 
     public async Task<IActionResult> DeletePlayerFromSession(Guid playerId, Guid sessionId)

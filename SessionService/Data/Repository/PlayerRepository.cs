@@ -37,13 +37,16 @@ public class PlayerRepository : ControllerBase, IPlayerRepository
     /// Add player to session
     /// </summary>
     /// <param name="playerModel"></param>
+    /// <param name="gamePin"></param>
     /// <returns></returns>
-    public async Task<ActionResult<PlayerModel>> AddPlayerToSession(PlayerModel playerModel)
+    public async Task<ActionResult<PlayerModel>> AddPlayerToSession(PlayerModel playerModel, int gamePin)
     {
-        if (!CheckIfSessionExists(playerModel.SessionModelId))
+        if (!CheckIfSessionWithGamePinExists(gamePin))
         {
             return NotFound();
         }
+
+        playerModel.SessionModelId = GetGuidFromGamePin(gamePin);
         
         _db.Player.Add(playerModel);
         await _db.SaveChangesAsync();
@@ -77,9 +80,9 @@ public class PlayerRepository : ControllerBase, IPlayerRepository
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    private bool CheckIfSessionExists(Guid id)
+    private bool CheckIfSessionWithGamePinExists(int gamePin)
     {
-        var session = _db.Session.FirstOrDefault(x => x.Id == id);
+        var session = _db.Session.FirstOrDefault(x => x.GamePin == gamePin);
 
         if (session == null)
         {
@@ -87,5 +90,17 @@ public class PlayerRepository : ControllerBase, IPlayerRepository
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Get Guid from gamepin
+    /// </summary>
+    /// <param name="gamePin"></param>
+    /// <returns></returns>
+    private Guid GetGuidFromGamePin(int gamePin)
+    {
+        var session = _db.Session.FirstOrDefault(x => x.GamePin == gamePin);
+
+        return session.Id;
     }
 }

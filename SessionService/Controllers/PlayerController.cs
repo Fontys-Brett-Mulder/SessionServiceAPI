@@ -27,10 +27,10 @@ public class PlayerController : ControllerBase
         return await _service.GetAllPlayersBySessionId(id);
     }
 
-    [HttpPost]
-    public async Task<ActionResult<PlayerModel>> AddPlayerToSession(PlayerModel playerModel)
+    [HttpPost("{gamePin}")]
+    public async Task<ActionResult<PlayerModel>> AddPlayerToSession(PlayerModel playerModel, int gamePin)
     {
-        return await _service.AddPlayerToSession(playerModel);
+        return await _service.AddPlayerToSession(playerModel, gamePin);
     }
 
     [HttpDelete]
