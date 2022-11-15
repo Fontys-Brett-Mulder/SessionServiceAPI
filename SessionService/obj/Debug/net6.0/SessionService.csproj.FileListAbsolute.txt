@@ -270,3 +270,5 @@ C:\Users\brett_pdltu26\Desktop\Fontys\SEMESTER_3\SessionServiceAPI\SessionServic
 C:\Users\brett_pdltu26\Desktop\Fontys\SEMESTER_3\SessionServiceAPI\SessionService\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\brett_pdltu26\Desktop\Fontys\SEMESTER_3\SessionServiceAPI\SessionService\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\brett_pdltu26\Desktop\Fontys\SEMESTER_3\SessionServiceAPI\SessionService\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\brett_pdltu26\Desktop\Fontys\SEMESTER_3\SessionServiceAPI\SessionService\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\brett_pdltu26\Desktop\Fontys\SEMESTER_3\SessionServiceAPI\SessionService\bin\Debug\net6.0\Moq.dll

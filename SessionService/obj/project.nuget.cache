@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZrV6qvTtnkWTUlIx6O2uoNKzNZ/w660soUbxnqBgkbnQBCdmh3i46lFhjbZBfoxBUJNkjTxN8Ckz1V3OUEmtLw==",
+  "dgSpecHash": "uIS/jyUazJ/TrN6Ww0Mo32DVSxZheG3He4A87GCj+cZEPdWOcdp5ssDlKIDlHISt+Da8JVTL0ObfBalBWpiq3g==",
   "success": true,
   "projectFilePath": "C:\\Users\\brett_pdltu26\\Desktop\\Fontys\\SEMESTER_3\\SessionServiceAPI\\SessionService\\SessionService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\brett_pdltu26\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
@@ -71,6 +72,7 @@
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\brett_pdltu26\\.nuget\\packages\\moq\\4.18.2\\moq.4.18.2.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
@@ -123,6 +125,7 @@
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.data.sqlclient\\4.8.4\\system.data.sqlclient.4.8.4.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\brett_pdltu26\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",

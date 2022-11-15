@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SessionService", "SessionService\SessionService.csproj", "{5B43C652-9F41-4B8F-A13A-F03C7A92013F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SessionService.Tests", "SessionService.Tests\SessionService.Tests.csproj", "{5A634179-A8E5-49A1-B2D9-44AAC7AAD3C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5B43C652-9F41-4B8F-A13A-F03C7A92013F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B43C652-9F41-4B8F-A13A-F03C7A92013F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B43C652-9F41-4B8F-A13A-F03C7A92013F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A634179-A8E5-49A1-B2D9-44AAC7AAD3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A634179-A8E5-49A1-B2D9-44AAC7AAD3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A634179-A8E5-49A1-B2D9-44AAC7AAD3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A634179-A8E5-49A1-B2D9-44AAC7AAD3C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
