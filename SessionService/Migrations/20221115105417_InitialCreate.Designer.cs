@@ -12,8 +12,8 @@ using SessionService.Data;
 namespace SessionService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221104100025_Declared players as nullable")]
-    partial class Declaredplayersasnullable
+    [Migration("20221115105417_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace SessionService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SessionModelId")
+                    b.Property<Guid?>("SessionModelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -75,13 +75,9 @@ namespace SessionService.Migrations
 
             modelBuilder.Entity("SessionService.Models.PlayerModel", b =>
                 {
-                    b.HasOne("SessionService.Models.SessionModel", "SessionModel")
+                    b.HasOne("SessionService.Models.SessionModel", null)
                         .WithMany("Players")
-                        .HasForeignKey("SessionModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SessionModel");
+                        .HasForeignKey("SessionModelId");
                 });
 
             modelBuilder.Entity("SessionService.Models.SessionModel", b =>
