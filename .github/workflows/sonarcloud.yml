@@ -38,7 +38,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet-sonarscanner begin /k:"Fontys-Brett-Mulder_SessionServiceAPI" /o:"mulderbrett" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html
+          dotnet-sonarscanner begin /k:"Fontys-Brett-Mulder_SessionServiceAPI" /o:"fontys-brett-mulder" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html
           dotnet build
           dotnet dotcover test --dcReportType=HTML
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
