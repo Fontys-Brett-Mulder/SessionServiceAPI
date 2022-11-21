@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using SessionService.Data.Repository.Interfaces;
 using SessionService.Models;
 
@@ -9,10 +10,21 @@ public class SessionRepositoryTest
     private readonly List<PlayerModel> _players1;
     private readonly List<PlayerModel> _players2;
 
+    private readonly SessionModel _sessionUpdated = new SessionModel()
+    {
+        Id = new Guid("7ea98e9a-7364-4b7a-af16-8a8b478ca58a"),
+        GamePin = 112233,
+        GameId = new Guid("1b6a49c1-52df-44e8-85dd-3a7a5d6a0779"),
+        Started = true,
+        CurrentPlayer = new Guid("ef6fc5e3-23d3-4ab2-95c6-4856b3b78bbd"),
+        PlayerWon = null,
+    };
+
     // private readonly ITestOutputHelper _testOutputHelper;
     private readonly Mock<ISessionRepository> _sessionRepository = new Mock<ISessionRepository>();
     private readonly Mock<IPlayerRepository> _playerRepository = new Mock<IPlayerRepository>();
 
+    
     public SessionRepositoryTest()
     {
         _players1 = new List<PlayerModel>()
@@ -109,5 +121,19 @@ public class SessionRepositoryTest
             
         // Check if all the 
         Assert.IsType<SessionModel>(session.Value);
+    }
+
+    [Theory]
+    [InlineData("7ea98e9a-7364-4b7a-af16-8a8b478ca58a")]
+    public void UpdateSessionModel(Guid guid)
+    {
+        // Creating a mock for the GetSpecificGame function
+        _sessionRepository.Setup(m => m.UpdateSession(It.IsAny<Guid>(), _sessionUpdated));
+
+        var _service = new SessionService.Services.SessionService(_sessionRepository.Object);
+
+        var newSession = _service.UpdateSession(guid, _sessionUpdated);
+
+        Assert.True(newSession != null);
     }
 }

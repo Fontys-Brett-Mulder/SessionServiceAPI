@@ -82,7 +82,7 @@ public class SessionRepository : ControllerBase, ISessionRepository
             throw;
         }
 
-        return Ok();
+        return Ok(session);
     }
 
     /// <summary>
