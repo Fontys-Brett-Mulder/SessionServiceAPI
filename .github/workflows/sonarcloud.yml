@@ -46,5 +46,4 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Fontys-Brett-Mulder_SessionServiceAPI" /o:"fontys-brett-mulder" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build –no-incremental
           dotnet dotcover test --dcReportType=HTML
-          dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
