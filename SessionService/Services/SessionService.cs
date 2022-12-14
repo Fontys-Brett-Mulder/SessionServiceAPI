@@ -39,9 +39,14 @@ public class SessionService : ControllerBase, ISessionService
         return await _repository.DeleteSession(id);
     }
 
-    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id)
+    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(int gamepin)
     {
-        return await _repository.GetPlayersFromSession(id);
+        return await _repository.GetPlayersFromSession(gamepin);
+    }
+
+    public async Task<ActionResult<SessionModel>> GetSessionByGamePin(int gamepin)
+    {
+        return await _repository.GetSessionByGamePin(gamepin);
     }
 
 }

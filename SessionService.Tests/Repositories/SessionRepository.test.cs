@@ -123,7 +123,7 @@ public class SessionRepositoryTest
         Assert.IsType<SessionModel>(session.Value);
     }
 
-    [Theory]
+    [Theory] 
     [InlineData("7ea98e9a-7364-4b7a-af16-8a8b478ca58a")]
     public void UpdateSessionModel(Guid guid)
     {

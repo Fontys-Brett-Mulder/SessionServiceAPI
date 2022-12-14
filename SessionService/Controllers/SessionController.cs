@@ -47,10 +47,16 @@ public class SessionController : ControllerBase
         return await _service.DeleteSession(id);
     }
 
-    [HttpGet("players/{id}")]
-    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id)
+    [HttpGet("players/{gamepin}")]
+    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(int gamepin)
     {
-        return await _service.GetPlayersFromSession(id);
+        return await _service.GetPlayersFromSession(gamepin);
+    }
+
+    [HttpGet("getSessionByPin/{gamepin}")]
+    public async Task<ActionResult<SessionModel>> GetSessionByGamePin(int gamepin)
+    {
+        return await _service.GetSessionByGamePin(gamepin);
     }
 
 }
