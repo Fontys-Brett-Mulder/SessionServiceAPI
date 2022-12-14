@@ -59,4 +59,9 @@ public class SessionController : ControllerBase
         return await _service.GetSessionByGamePin(gamepin);
     }
 
+    [HttpGet("startGameByPin/{gamepin}")]
+    public async Task<ActionResult<bool>> StartGameByPin(int gamepin)
+    {
+        return await _service.StartGameByPin(gamepin);
+    }
 }

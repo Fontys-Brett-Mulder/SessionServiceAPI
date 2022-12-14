@@ -49,4 +49,8 @@ public class SessionService : ControllerBase, ISessionService
         return await _repository.GetSessionByGamePin(gamepin);
     }
 
+    public async Task<ActionResult<bool>> StartGameByPin(int gamepin)
+    {
+        return await _repository.StartGameByPin(gamepin);
+    }
 }
