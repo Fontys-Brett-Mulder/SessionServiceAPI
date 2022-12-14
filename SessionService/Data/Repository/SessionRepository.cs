@@ -82,7 +82,7 @@ public class SessionRepository : ControllerBase, ISessionRepository
             throw;
         }
 
-        return Ok();
+        return Ok(session);
     }
 
     /// <summary>
@@ -144,11 +144,37 @@ public class SessionRepository : ControllerBase, ISessionRepository
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id)
+    public async Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(int gamepin)
     {
-        var players = await _db.Session.Where(s => s.Id == id).SelectMany(m => m.Players).ToListAsync();
+        var players = await _db.Session.Where(s => s.GamePin == gamepin).SelectMany(m => m.Players).ToListAsync();
 
         return players;
     }
+
+    /// <summary>
+    /// Get Session By Id
+    /// </summary>
+    /// <param name="gamepin"></param>
+    /// <returns></returns>
+    public async Task<ActionResult<SessionModel>> GetSessionByGamePin(int gamepin)
+    {
+        return await _db.Session.Include(c => c.Players).FirstAsync(x => x.GamePin == gamepin);
+    }
     
+    /// <summary>
+    /// Start Game By Id
+    /// </summary>
+    /// <param name="gamepin"></param>
+    /// <returns></returns>
+    public async Task<ActionResult<bool>> StartGameByPin(int gamepin)
+    {
+        var game = await _db.Session.FirstAsync(x => x.GamePin == gamepin);
+
+        game.Started = true;
+        
+        _db.Entry(game).CurrentValues.SetValues(game);
+        var success = await _db.SaveChangesAsync();
+
+        return success > 0;
+    }
 }

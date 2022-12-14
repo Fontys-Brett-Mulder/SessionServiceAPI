@@ -10,5 +10,7 @@ public interface ISessionService
     Task<IActionResult> UpdateSession(Guid id, SessionModel sessionModel);
     Task<ActionResult<SessionModel>> CreateSession(SessionModel sessionModel);
     Task<IActionResult> DeleteSession(Guid id);
-    Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(Guid id);
+    Task<ActionResult<IEnumerable<PlayerModel>>> GetPlayersFromSession(int gamepin);
+    Task<ActionResult<SessionModel>> GetSessionByGamePin(int gamepin);
+    Task<ActionResult<bool>> StartGameByPin(int gamepin);
 }
