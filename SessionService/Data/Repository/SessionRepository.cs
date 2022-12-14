@@ -160,4 +160,21 @@ public class SessionRepository : ControllerBase, ISessionRepository
     {
         return await _db.Session.Include(c => c.Players).FirstAsync(x => x.GamePin == gamepin);
     }
+    
+    /// <summary>
+    /// Start Game By Id
+    /// </summary>
+    /// <param name="gamepin"></param>
+    /// <returns></returns>
+    public async Task<ActionResult<bool>> StartGameByPin(int gamepin)
+    {
+        var game = await _db.Session.FirstAsync(x => x.GamePin == gamepin);
+
+        game.Started = true;
+        
+        _db.Entry(game).CurrentValues.SetValues(game);
+        var success = await _db.SaveChangesAsync();
+
+        return success > 0;
+    }
 }
